@@ -1,16 +1,60 @@
 "use client";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
-import React, { useState } from "react";
+// Define the City interface
+interface City {
+  fromLocation: string;
+}
 
 const Form = () => {
-  const [step, setStep] = useState(0);
+  const [fromLocationValue, setFromLocationValue] = useState("");
+  const [toLocationValue, setToLocationValue] = useState("");
+  const [vehicleValue, setVehicleValue] = useState("");
+  const [dateValue, setDateValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [city, setCity] = useState<City[]>([]); // Type the city state
 
-  const handleNext = () => {
-    if (step < 3) setStep(step + 1);
+  useEffect(() => {
+    const fetchAvailableCity = async () => {
+      try {
+        const res = await axios.get(
+          "https://ibom-transport.onrender.com/api/shuttle/get-all-shuttle"
+        );
+        setCity(res.data);
+        console.log("Fetched cities:", res.data);
+      } catch (err) {
+        console.error("City fetching error:", err);
+      }
+    };
+
+    fetchAvailableCity();
+  }, []);
+
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get(
+        "https://ibom-transport.onrender.com/api/shuttle/get-all-shuttle",
+        {
+          params: {
+            fromLocation: fromLocationValue,
+            destination: toLocationValue,
+            timeOfTravel: dateValue,
+            vehicleType: vehicleValue,
+          },
+        }
+      );
+      setLoading(false);
+      console.log("Booking response:", res.data);
+    } catch (err) {
+      setLoading(false);
+      console.error("Booking error:", err);
+    }
   };
 
   return (
-    <div className="w-full mx-auto  md:w-[50%] p-4 sm:p-8">
+    <div className="w-full mx-auto md:w-[50%] p-4 sm:p-8">
       <div data-aos="fade-up" className="w-full">
         <div className="bg-white p-6 rounded-lg shadow-xl">
           <h2 className="text-2xl font-bold mb-6 text-white bg-black p-2 rounded">
@@ -26,77 +70,95 @@ const Form = () => {
               </label>
               <select
                 name="fromLocation"
+                value={fromLocationValue}
+                onChange={(e) => setFromLocationValue(e.target.value)}
                 id="fromLocation"
                 className="mt-1 block w-full px-3 py-2 bg-gray-500 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
               >
                 <option value="" disabled className="text-slate-700">
                   Select City or Travel
                 </option>
-                <option value="city1" className="text-slate-700">
-                  City 1
-                </option>
-                <option value="city2" className="text-slate-700">
-                  City 2
-                </option>
-                <option value="city3" className="text-slate-700">
-                  City 3
-                </option>
-                <option value="city4" className="text-slate-700">
-                  City 4
-                </option>
+                {city.length > 0 ? (
+                  city.map((item, index) => (
+                    <option value={item.fromLocation} key={index}>
+                      {item.fromLocation}
+                    </option>
+                  ))
+                ) : (
+                  <option value="" disabled>
+                    No cities available
+                  </option>
+                )}
               </select>
             </div>
-
             <div>
               <label
-                htmlFor="toLocation"
+                htmlFor="fromLocation"
                 className="block text-sm font-medium text-gray-700"
               >
                 Travelling To:
               </label>
               <select
-                name="toLocation"
-                id="toLocation"
+                name="fromLocation"
+                value={toLocationValue}
+                onChange={(e) => setFromLocationValue(e.target.value)}
+                id="fromLocation"
                 className="mt-1 block w-full px-3 py-2 bg-gray-500 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
               >
                 <option value="" disabled className="text-slate-700">
                   Select City or Travel
                 </option>
-                <option value="city1" className="text-slate-700">
-                  City 1
+                {city.length > 0 ? (
+                  city.map((item, index) => (
+                    <option value={item.fromLocation} key={index}>
+                      {item.fromLocation}
+                    </option>
+                  ))
+                ) : (
+                  <option value="" disabled>
+                    No cities available
+                  </option>
+                )}
+              </select>
+            </div>
+            <div>
+              <label
+                htmlFor="fromLocation"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Travelling From:
+              </label>
+              <select
+                name="fromLocation"
+                value={fromLocationValue}
+                onChange={(e) => setFromLocationValue(e.target.value)}
+                id="fromLocation"
+                className="mt-1 block w-full px-3 py-2 bg-gray-500 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
+              >
+                <option value="" disabled className="text-slate-700">
+                  Select City or Travel
                 </option>
-                <option value="city2" className="text-slate-700">
-                  City 2
-                </option>
-                <option value="city3" className="text-slate-700">
-                  City 3
-                </option>
-                <option value="city4" className="text-slate-700">
-                  City 4
-                </option>
+                {city.length > 0 ? (
+                  city.map((item, index) => (
+                    <option value={item.fromLocation} key={index}>
+                      {item.fromLocation}
+                    </option>
+                  ))
+                ) : (
+                  <option value="" disabled>
+                    No cities available
+                  </option>
+                )}
               </select>
             </div>
 
-            <div>
-              <label
-                htmlFor="travelDate"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Travel Date
-              </label>
-              <input
-                type="date"
-                id="travelDate"
-                className="mt-1 block w-full px-3 py-2 bg-gray-500 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black"
-                required
-              />
-            </div>
+            {/* Rest of your form fields */}
 
             <button
-              onClick={handleNext}
               className="w-full bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition duration-300"
+              onClick={fetchData}
             >
-              Book Now
+              {loading ? "Booking.." : "Book Now"}
             </button>
           </div>
         </div>
