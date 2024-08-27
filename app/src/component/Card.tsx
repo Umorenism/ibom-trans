@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 
@@ -8,7 +6,8 @@ interface CardProps {
   title: string;
   description: string;
   buttonText: string;
-  //   onButtonClick: () => void;
+  onButtonClick: () => void;
+  numb: number;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -16,27 +15,37 @@ const Card: React.FC<CardProps> = ({
   title,
   description,
   buttonText,
-  //   onButtonClick,
+  onButtonClick,
+  numb,
 }) => {
   return (
-    <div className="max-w-sm bg-white rounded overflow-hidden shadow-lg relative">
+    <div className="relative max-w-sm bg-white rounded overflow-hidden min-h-[200px] shadow-lg">
+      {/* Image with overlay */}
       <div className="relative">
         <Image className="w-full" src={img1} alt={title} />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <h2 className="text-white text-2xl font-bold">{title}</h2>
+          <span className="text-white text-lg font-bold">{title}</span>
         </div>
       </div>
+
+      {/* Content below the image */}
       <div className="px-6 py-4">
-        <p className="text-gray-700 text-base">{description}</p>
+        <p className="text-gray-700 text-base text-start">
+          <span className="text-xl"> Address:</span> {description}
+        </p>
+        <p className="text-gray-700 text-base py-2">
+          <span className="text-xl">Contact:</span> {numb}
+        </p>
       </div>
-      <div className="px-6 pt-4 pb-2">
-        {/* <button
+
+      {/* <div className="px-6 pt-4 pb-2">
+        <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={onButtonClick}
         >
           {buttonText}
-        </button> */}
-      </div>
+        </button>
+      </div> */}
     </div>
   );
 };
