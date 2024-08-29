@@ -1,10 +1,22 @@
 "use client";
 
+import axios from "axios";
 import Link from "next/link";
 import React, { useState } from "react";
 
 export const Reschedule = () => {
   // usenavigate = useNevigate("/dummy")
+
+  const fetchStuff = async () => {
+    await axios
+      .get("")
+      .then((response) => {
+        console.log("Api response:  ", response.data);
+      })
+      .catch((err) => {
+        console.log("some error:  ", err);
+      });
+  };
   return (
     <div className="w-full mx-auto  md:w-[50%] p-4 sm:p-8">
       <div data-aos="fade-up" className="w-full">

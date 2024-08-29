@@ -1,13 +1,16 @@
-"use client"; // Mark this file as a Client Component
-
+"use client";
 import React from "react";
+import { useSearchParams } from "next/navigation";
 import html2canvas from "html2canvas";
-import { useRouter, useSearchParams } from "next/navigation";
 
 const Dummypage: React.FC = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const bookingID = searchParams.get("bookingID");
+
+  const fromLocation = searchParams.get("fromLocation") || "";
+  const toLocation = searchParams.get("toLocation") || "";
+  const vehicleType = searchParams.get("vehicleType") || "";
+  const dateValue = searchParams.get("dateValue") || "";
+  const bookingID = searchParams.get("bookingId") || "";
 
   const handleDownload = () => {
     const receiptElement = document.getElementById("receipt");
@@ -15,12 +18,10 @@ const Dummypage: React.FC = () => {
     const contactButton = document.getElementById("contact-button");
 
     if (receiptElement) {
-      // Hide buttons
       if (downloadButton) downloadButton.style.display = "none";
       if (contactButton) contactButton.style.display = "none";
 
       html2canvas(receiptElement).then((canvas) => {
-        // Show buttons back
         if (downloadButton) downloadButton.style.display = "block";
         if (contactButton) contactButton.style.display = "block";
 
@@ -33,52 +34,42 @@ const Dummypage: React.FC = () => {
   };
 
   return (
-    <div className="py-10 w-full">
-      <div className="container shadow-lg max-w-xl">
-        <div
-          data-aos="fade-up"
-          className="text-center p-4 rounded-md mb-20 w-full bg-white"
-          id="receipt"
-        >
-          <div className="mb-4 flex justify-between items-center">
-            <h1></h1>
-            <button
-              id="download-button"
-              onClick={handleDownload}
-              className="bg-gray-200 px-4 shadow-2xl border py-2"
-            >
-              Download Receipt
-            </button>
-          </div>
-          <h1 className="text-2xl font-serif mb-4">Receipt</h1>
-          <div>
-            <div className="flex justify-between items-center">
-              <h1 className="text-xl font-mono">From Destination:</h1>
-              <p className="text-xl font-mono">Uyo</p>
-            </div>
-            <div className="flex justify-between py-4 items-center">
-              <h1 className="text-xl font-mono">To:</h1>
-              <p className="text-xl font-mono">Lagos</p>
-            </div>
-            <div className="flex justify-between items-center">
-              <h1 className="text-xl font-mono">Travel Time:</h1>
-              <p className="text-xl font-mono">Uyo</p>
-            </div>
-            <div className="flex justify-between py-4 items-center">
-              <h1 className="text-xl font-mono">Booking ID:</h1>
-              <p className="text-xl font-mono">uyo4235141321331523</p>
-            </div>
-            <div className="flex justify-between py-4 items-center">
-              <h1 className="text-xl font-mono"></h1>
-              <button
-                id="contact-button"
-                className="text-xl px-4 py-2 bg-slate-600 rounded-md text-white font-mono"
-              >
-                Contact
-              </button>
-            </div>
-          </div>
+    <div className="w-full mx-auto flex justify-center items-center p-4">
+      <div className="bg-white w-[50%] p-6 rounded-lg shadow-xl">
+        <h2 className="text-2xl font-bold mb-6 text-white bg-black p-2 rounded">
+          Booking Confirmation Receipts
+        </h2>
+        <div id="receipt">
+          <p className="flex justify-between">
+            <strong>Booking ID:</strong> {bookingID}
+          </p>
+          <p className="flex justify-between">
+            <strong>Travelling From:</strong> {fromLocation}
+          </p>
+          <p className="flex justify-between">
+            <strong>Travelling To:</strong> {toLocation}
+          </p>
+          <p className="flex justify-between">
+            <strong>Vehicle Type:</strong> {vehicleType}
+          </p>
+          <p className="flex justify-between">
+            <strong>Travelling Date:</strong> {dateValue}
+          </p>
         </div>
+        <button
+          id="download-button"
+          onClick={handleDownload}
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-blue-700 transition duration-300"
+        >
+          Download Receipt
+        </button>
+        {/* <a
+          id="contact-button"
+          href="mailto:info@example.com"
+          className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4 block text-center hover:bg-green-700 transition duration-300"
+        >
+          Contact Us
+        </a> */}
       </div>
     </div>
   );
