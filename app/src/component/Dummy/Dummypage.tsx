@@ -63,13 +63,6 @@ const Dummypage: React.FC = () => {
         >
           Download Receipt
         </button>
-        {/* <a
-          id="contact-button"
-          href="mailto:info@example.com"
-          className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4 block text-center hover:bg-green-700 transition duration-300"
-        >
-          Contact Us
-        </a> */}
       </div>
     </div>
   );
