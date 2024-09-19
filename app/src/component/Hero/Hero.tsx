@@ -20,7 +20,7 @@ export const Hero = () => {
           <div className="text-center space-y-5 py-14">
             <p
               data-aos="fade-up"
-              className="text-primary text-3xl font-semibold uppercase"
+              className="text-primary text-3xl font-semibold "
             >
               Welcome to Ibom Express <br />
               Transport Company
