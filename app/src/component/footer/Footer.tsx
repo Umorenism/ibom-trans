@@ -17,7 +17,7 @@ export const Footer = () => {
       <div className="bg-primary">
         <div className="container text-black text-center py-10 lg:py-14 text-2xl font-bold space-y-4">
           <p>WE ARE READY TO TAKE YOUR CALL 24 HOURS,7 DAYS</p>
-          <h1>+1239060789908</h1>
+          <h1>www.ietc.com</h1>
         </div>
       </div>
       {/* lower section */}

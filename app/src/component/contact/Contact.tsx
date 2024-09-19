@@ -10,10 +10,10 @@ export const Contact = () => {
           {/* Left Content */}
           <div className="space-y-5 sm:p-16">
             <h1 data-aos="fade-up" className="text-2xl sm:text-3xl">
-              Best in City
+              Best in town
             </h1>
-            <h1 data-aos="fade-up" className="text-3xl sm:text-4xl font-bold">
-              TRUSTED DELIVERY SERVICES IN UYO
+            <h1 data-aos="fade-up" className="text-3xl sm:text-4xl font-bold ">
+              Trusted delivery services in town
             </h1>
             <p data-aos="fade-up" className="leading-8 tracking-wide">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos

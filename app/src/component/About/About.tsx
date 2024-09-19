@@ -19,10 +19,10 @@ export const About = () => {
               data-aos="fade-up"
               className="text-primary text-2xl font-semibold uppercase"
             >
-              We do Best
+              We do our best
             </p>
             <h1 data-aos="fade-up" data-aos-delay="300" className="text-3xl">
-              Than you wish
+              Than you!
             </h1>
           </div>
           {/* card section */}

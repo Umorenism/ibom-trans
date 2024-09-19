@@ -22,21 +22,22 @@ export const Hero = () => {
               data-aos="fade-up"
               className="text-primary text-3xl font-semibold uppercase"
             >
-              Book a Ride to your Destination Now
+              Welcome to Ibom Express <br />
+              Transport Company
             </p>
-            <h1
+            {/* <h1
               data-aos="fade-up"
               data-aos-delay="600"
               className="text-4xl md:text-6xl font-semibold"
             >
               07062840515
-            </h1>
+            </h1> */}
             <p
               data-aos="fade-up"
               data-aos-delay="1000"
               className="tracking-[8px] text-base sm:text-xl font-semibold"
             >
-              www.bookride.com
+              www.IETC.com
             </p>
           </div>
           {/* image section */}
